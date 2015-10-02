@@ -9,20 +9,16 @@
  * Main module of the application.
  */
 angular
-  .module('clientApp', [
-    'ngRoute'
+  .module('AngularApp', [
+    'ngRoute', 'xeditable'
   ])
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
+      .when('/home', {
+        template: '<div>test</div>'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
+      .when('/issues', {
+        templateUrl: '../views/issues.html'
       })
       .otherwise({
         redirectTo: '/'

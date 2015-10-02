@@ -130,7 +130,7 @@ app.put('/api/issues/:issue_Id', function (req, res) {
         var col = db.collection('messages'); //TODO change to issues
 
         try {
-            col.findAndModify({_id: ObjectId(search_by_id.toString())},  [['_id','asc']], {
+            col.findAndModify({_id: ObjectId(search_by_id.toString())}, [['_id', 'asc']], {
                 $set: {
                     name: req.body.name,
                     description: req.body.desc

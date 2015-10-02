@@ -1,0 +1,96 @@
+<div class="container-fluid">
+  <div class="list-group">
+    <div class="col-sm-6 col-sm-offset-1">
+      <h2>List of open issues : </h2> <br>
+
+      <div class="panel panel-default">
+        <table class="table table table-striped">
+
+          <thead>
+          <th>Issue</th>
+          <th>Description</th>
+          <th>mode</th>
+          </thead>
+
+
+          <tr ng-repeat="item in openIssues">
+
+
+            <td>
+              <!-- editable username (text with validation) -->
+        <span editable-text="item.name" e-name="title" e-form="rowform"
+              e-required>
+          {{ item.name | uppercase }}
+        </span>
+            </td>
+
+            <td>
+              <!-- editable username (text with validation) -->
+        <span editable-text="item.description" e-name="description" e-form="rowform" e-required>
+         {{item.description}}
+        </span>
+            </td>
+
+            <td>
+              <form editable-form name="rowform" onbeforesave="handelEdit($data,item)" ng-show="rowform.$visible"
+                    class="form-buttons form-inline">
+                <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
+                  save
+                </button>
+
+                <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()"
+                        class="btn btn-default">
+                  cancel
+                </button>
+              </form>
+
+
+              <div class="buttons" ng-show="!rowform.$visible">
+                <button class="btn btn-primary" ng-click="rowform.$show()"><span
+                  class="glyphicon glyphicon-edit"></span></button>
+                <button class="btn btn-danger" ng-click="deleteRecord(item,$index)"><span
+                  class="glyphicon glyphicon-minus"></span></button>
+              </div>
+
+            </td>
+
+          </tr>
+
+
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <form class="form-horizontal col-sm-12">
+      <div class="form-group">
+      </div>
+      <br>
+
+      <div class="form-group">
+        <label for="issueDescription" class="control-label col-sm-1">
+        </label>
+
+
+        <div class="col-sm-2 col-sm-offset-0">
+          <h2>create a new issue: </h2>
+          <br>
+
+          <form>
+            <input ng-model="newIssue.subject" class="form-control" placeholder="Subject"
+                   type="text"/>
+            <br><br>
+                        <textarea ng-model="newIssue.content" placeholder="Leave a comment" id="issueDescription"
+                                  class="form-control"></textarea>
+            <br>
+            <button ng-click="addNewIssue(newIssue)" id="addBtn" class="btn btn-success btn-lg">
+              Submit new issue
+            </button>
+
+          </form>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>

@@ -10,7 +10,7 @@ angular.module('AngularApp')
   .controller('clIssuesCtrl', clIssuesCtrl);
 
 
-var API_BASE_URL= "http://localhost:3000/api/"
+const API_BASE_URL = "http://localhost:3000/api/";
 
 
 function clIssuesCtrl($scope, $http, $log, IssueService) {
@@ -32,22 +32,11 @@ function clIssuesCtrl($scope, $http, $log, IssueService) {
   $scope.addNewIssue = function (newIssue) {
 
 //TODO should ideally be part of the service code
-    var dto = {};
-    dto.name = newIssue.subject;
-    dto.desc = newIssue.content;
 
-    var res = $http.post(API_BASE_URL +'create', dto, {
-      headers: {'Content-Type': 'application/json'},
-    });
-    res.success(function (data, status, headers, config) {
-      $scope.message = data;
-      //data is inserted -
+    IssueService.save_data(newIssue).then(function(){
       retrive_data();
     });
-    res.error(function (data, status, headers, config) {
-      alert("failure message: " + JSON.stringify({data: data}));
-    });
-
+    
   };
 
   $scope.handelEdit = function (data, item) {
@@ -59,7 +48,7 @@ function clIssuesCtrl($scope, $http, $log, IssueService) {
     dto.name = data.title;
     dto.desc = data.description;
 
-    var res = $http.put(API_BASE_URL +'issues/' + item._id, dto, {
+    var res = $http.put(API_BASE_URL + 'issues/' + item._id, dto, {
       headers: {'Content-Type': 'application/json'},
     });
     res.success(function (data, status, headers, config) {
@@ -74,7 +63,7 @@ function clIssuesCtrl($scope, $http, $log, IssueService) {
   };
 
   $scope.deleteRecord = function (item) {
-    $http.delete(API_BASE_URL+ 'issues/' + item._id)
+    $http.delete(API_BASE_URL + 'issues/' + item._id)
       .success(function (data) {
         retrive_data();
       })

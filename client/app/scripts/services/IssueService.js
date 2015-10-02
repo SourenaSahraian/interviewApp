@@ -24,9 +24,7 @@ angular.module('AngularApp').service('IssueService', function ($http, $log) {
         headers: {'Content-Type': 'application/json'},
       }).then(function (successResponse) {
        return successResponse.data;
-      }) , function (error) {
-        $log.error(error);
-      }
+      })
 
     }
 
